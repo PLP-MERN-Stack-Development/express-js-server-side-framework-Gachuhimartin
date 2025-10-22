@@ -1,62 +1,143 @@
-# Express.js RESTful API Assignment
+# 🏫 Express.js Server-Side Framework Assignment
 
-This assignment focuses on building a RESTful API using Express.js, implementing proper routing, middleware, and error handling.
+## 🚀 Overview
+This project is a **Node.js + Express.js API** built as part of the PLP MERN Stack Assignment.  
+It demonstrates essential server-side features, including:
+- RESTful CRUD operations
+- Middleware implementation
+- Authentication using API keys
+- Error handling
+- MongoDB integration with Mongoose
+- Filtering, pagination, and search support
 
-## Assignment Overview
+---
 
-You will:
-1. Set up an Express.js server
-2. Create RESTful API routes for a product resource
-3. Implement custom middleware for logging, authentication, and validation
-4. Add comprehensive error handling
-5. Develop advanced features like filtering, pagination, and search
+## 📂 Project Structure
+📦 express-js-server-side-framework
+├── config/
+│ └── db.js # Database connection
+├── controllers/
+│ └── product.controller.js
+├── middleware/
+│ ├── auth.js # Authentication middleware
+│ ├── logger.js # Custom request logger
+│ ├── validateProduct.js # Request validation middleware
+├── models/
+│ └── product.model.js
+├── routes/
+│ └── product.route.js
+├── server.js
+├── .env
+├── package.json
+└── README.md
 
-## Getting Started
+2️⃣ Install Dependencies
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Install dependencies:
-   ```
-   npm install
-   ```
-4. Run the server:
-   ```
-   npm start
-   ```
+npm install
 
-## Files Included
+3️⃣ Configure Environment Variables
 
-- `Week2-Assignment.md`: Detailed assignment instructions
-- `server.js`: Starter Express.js server file
-- `.env.example`: Example environment variables file
+Create a .env file in your root directory with the following:
 
-## Requirements
+MONGO_URI=mongodb://localhost:27017/assignmentDB
+PORT=3000
+API_KEY=1234abcde
 
-- Node.js (v18 or higher)
-- npm or yarn
-- Postman, Insomnia, or curl for API testing
+4️⃣ Run the Server
 
-## API Endpoints
+npm run dev
 
-The API will have the following endpoints:
+When successful, you’ll see:
 
-- `GET /api/products`: Get all products
-- `GET /api/products/:id`: Get a specific product
-- `POST /api/products`: Create a new product
-- `PUT /api/products/:id`: Update a product
-- `DELETE /api/products/:id`: Delete a product
+Database connected successfully
+Server is up and running on port 3000........
 
-## Submission
+🧱 API Endpoints
+📍 Base URL
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+http://localhost:3000/api/product
 
-1. Complete all the required API endpoints
-2. Implement the middleware and error handling
-3. Document your API in the README.md
-4. Include examples of requests and responses
+🧾 Headers (for all protected routes)
+Key	Value
+x-api-key	1234abcde
+🧰 Routes
+➕ Create Product
 
-## Resources
+POST /api/product
 
-- [Express.js Documentation](https://expressjs.com/)
-- [RESTful API Design Best Practices](https://restfulapi.net/)
-- [HTTP Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) 
+{
+  "name": "Laptop",
+  "description": "High-performance laptop with 16GB RAM",
+  "price": 1200,
+  "category": "electronics",
+  "inStock": true
+}
+
+✅ Requires Header: x-api-key: 1234abcde
+📋 Get All Products
+
+GET /api/product
+
+    Supports filtering by category:
+    /api/product?category=electronics
+
+    Supports pagination:
+    /api/product?page=1&limit=5
+
+    Supports search by name:
+    /api/product/search?name=Laptop
+
+🔍 Get Single Product
+
+GET /api/product/:id
+✏️ Update Product
+
+PUT /api/product/:id
+
+{
+  "name": "Updated Laptop",
+  "price": 1300
+}
+
+✅ Requires Header: x-api-key: 1234abcde
+❌ Delete Product
+
+DELETE /api/product/:id
+✅ Requires Header: x-api-key: 1234abcde
+🧠 Middleware Implemented
+Middleware	Description
+Logger	Logs request method, URL, and timestamp
+JSON Parser	Parses incoming JSON request bodies
+Authentication	Verifies API key from request headers
+Validation	Validates request body for product creation/update
+Error Handler	Handles all global errors gracefully
+⚡ Error Handling
+
+Custom error responses with appropriate HTTP status codes:
+
+    400 – Validation Error
+
+    401 – Unauthorized (Invalid API key)
+
+    404 – Not Found
+
+    500 – Internal Server Error
+
+🧩 Technologies Used
+
+    Node.js
+
+    Express.js
+
+    MongoDB (via Mongoose)
+
+    dotenv
+
+    Postman (for testing)
+
+🧑‍💻 Author
+
+Martin Gachuhi
+📧 Email: [your.email@example.com
+]
+🌐 GitHub: Gachuhimartin
